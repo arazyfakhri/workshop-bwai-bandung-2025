@@ -1,1 +1,1 @@
-# workshop-bwai-bandung-2025
+# Workshop Build with AI Bandung 2025
