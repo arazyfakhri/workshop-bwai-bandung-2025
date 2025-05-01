@@ -24,6 +24,7 @@ Untuk video hands on workshop ini bisa dilihat rekaman nya di :
 ## Prerequisite
 - Memiliki kredit GCP
 - Membuat projek baru di GCP
+- Membuat bucket baru di GCS dengan nama bucket **bwai_bandung2025_yourname_100525** & location : Multi Region US
 
 ## Step by Steps hands on Workshop
 
@@ -55,4 +56,55 @@ In this step you create a Cloud resource connection in BigQuery, so you can work
 ### Step 2 Upload all datasets files to GCS buckets(images and csv files) and grant IAM role to service account
 In this task, you uploads all datasets files (csv and image files) to GCS Buckets , then you grant IAM permissions to the cloud resource connection's service account.
 #### 2.1 Upload all datasets files to GCS buckets(images and csv files)
-- 
+- Download all dataset files (images and csv files) in folders [lab-workshop/gsp1246](https://github.com/saipulrx/workshop-bwai-bandung-2025/tree/main/lab-workshop/gsp1246) to your local computer
+- Upload them to your GCS bucket **bwai_bandung2025_yourname_100525** 
+![gcs_buckets_dataset](https://github.com/saipulrx/workshop-bwai-bandung-2025/blob/main/assets/gcs_buckets.png) 
+
+#### 2.2 Grant IAM Storage Object Admin role to the connection's service account
+
+Granting IAM permissions to the resource connection's service account before you start working in BigQuery will ensure you do not encounter access denied errors when running queries.
+
+- Return to the root of the bucket.
+- Click PERMISSIONS.
+- Click GRANT ACCESS.
+- In the New principals field, enter the service account ID you copied earlier.
+- In the Select a role field, enter Storage Object, and then select Storage Object Admin role.
+- Click Save.
+
+The result is the service account now includes the Storage Object Admin role.
+
+### Step 3. Create the dataset, and tables in BigQuery
+
+In this task, you create a dataset for the project, the table for customer reviews, and the image object table.
+
+#### 3.1 Create the dataset
+- In the console, select the Navigation menu (Navigation menu icon), and then select BigQuery.
+- In the Explorer panel, for qwiklabs-gcp-03-4acd241016e5, select View actions (More menu icon), and then select Create dataset.
+You create a dataset to store database objects, including tables and models.
+- In the Create dataset pane, enter the following information:
+
+| Field      | Value       |
+| -----------|-------------|
+| Dataset ID | gemini_demo |
+| Location Type | Select **Multi-region** |
+| Multi-region | US |
+
+Leave the other fields at their defaults.
+
+- Click Create Dataset.
+
+The result is the gemini_demo dataset is created and listed underneath your project in the BigQuery Explorer.
+
+#### 3.2 Create the table for the customer reviews
+To create the customer reviews table you will use a SQL query.
+
+- Click the + to Create a new SQL Query.
+
+- In the query editor, paste the query below.
+```
+LOAD DATA OVERWRITE gemini_demo.customer_reviews
+(customer_review_id INT64, customer_id INT64, location_id INT64, review_datetime DATETIME, review_text STRING, social_media_source STRING, social_media_handle STRING)
+FROM FILES (
+  format = 'CSV',
+  uris = ['gs://bwai_bandung2025_yourname_100525/gsp1246/customer_reviews.csv']);
+```
