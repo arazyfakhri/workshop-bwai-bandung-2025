@@ -17,14 +17,10 @@ Event ini adalah bagian dari Google Cloud Roadshows x Build with AI, salah satu 
 
 Lab Workshop ini di ambil dari [GSP1246 - Analyze Customer Reviews with Gemini Using SQL](https://www.cloudskillsboost.google/paths/1281/course_templates/1133/labs/507933) dengan sedikit modifikasi untuk menyesuaikan dengan hands on langsung di GCP Console
 
-## Video Recording Hands on Workshop
-
-Untuk video hands on workshop ini bisa dilihat rekaman nya di : 
-
 ## Prerequisite
-- Memiliki kredit GCP
-- Membuat projek baru di GCP
-- Membuat bucket baru di GCS dengan nama bucket **bwai_bandung2025_yourname_100525** & location : Multi Region US
+- Have Google Cloud Credits
+- Create new Project in Google Cloud
+- Create new bucket in GCS with name **bwai_bandung2025_yourname_100525** & location : Multi Region US
 
 ## Step by Steps hands on Workshop
 
